@@ -4,7 +4,7 @@ const tiqueteSchema = new Schema({
   documento: {
     type: Number,
     unique: true,
-    required: true, // Se asegura que siempre se proporcione un documento
+    required: true, 
   },
   numeroTiquete: {
     type: Number,
@@ -18,13 +18,16 @@ const tiqueteSchema = new Schema({
   },
   origen: {
     type: String,
+    required: true
   },
   destino: {
     type: String,
+    required: true
   },
   valor: {
     type: Number,
-    required: true, // El valor es requerido para calcular el impuesto
+    required: true, 
+    min:[0,'el valor no puede ser negativo']
   },
   impuesto: {
     type: Number,
@@ -52,4 +55,6 @@ tiqueteSchema.pre('save', async function (next) {
   next();
 });
 
+
 export default model('Tiquetes', tiqueteSchema);
+
